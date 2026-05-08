@@ -1,0 +1,15 @@
+.app-container {
+  display: flex;
+  min-height: 100vh;
+  background-color: #f8faf8;
+}
+
+.main-content {
+  margin-left: 160px;
+  min-height: 100vh;
+  background-color: #F8FAF8;
+}
+
+.page-content {
+  padding: 20px;
+}

@@ -1,0 +1,15 @@
+<div class="auth-container">
+
+<h2>Login</h2>
+
+<input [(ngModel)]="email" placeholder="Email" />
+<input [(ngModel)]="password" type="password" placeholder="Password" />
+
+<button (click)="login()">Login</button>
+
+  <p>
+    Don't have an account?
+    <a routerLink="/register">Register</a>
+  </p>
+
+</div>

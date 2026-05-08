@@ -1,0 +1,127 @@
+.sidebar {
+  position: fixed;
+  left: 0;
+  top: 0;
+
+  width: 160px;
+  height: 50vh;
+
+  background: #FFFFFF;
+  border-right: 1px solid #E5E7EB;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+
+  padding: 16px 12px;
+}
+
+/* =========================
+   LOGO SECTION
+========================= */
+.logo-section {
+  text-align: center;
+  padding: 16px 8px;
+  margin-bottom: 24px;
+}
+
+.logo-icon {
+  width: 28px;
+  height: 28px;
+  color: #2D6A4F;
+  margin-bottom: 6px;
+}
+
+.logo-title {
+  font-weight: 700;
+  font-size: 16px;
+  color: #111827;
+}
+
+.logo-subtitle {
+  font-size: 12px;
+  color: #6B7280;
+}
+
+/* =========================
+   MENU
+========================= */
+.menu {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+/* base link */
+.menu a {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+
+  padding: 10px 12px;
+  border-radius: 8px;
+
+  text-decoration: none;
+
+  color: #6B7280;
+  font-size: 14px;
+  font-weight: 500;
+
+  transition: all 0.2s ease;
+}
+
+/* icon */
+.menu a i {
+  font-size: 18px;
+  color: #6B7280;
+}
+
+/* hover */
+.menu a:hover {
+  background: #E8F5E9;
+  color: #2D6A4F;
+}
+
+.menu a:hover i {
+  color: #2D6A4F;
+}
+
+/* ACTIVE STATE */
+.menu a.active {
+  background: #2D6A4F;
+  color: #FFFFFF;
+}
+
+.menu a.active i {
+  color: #FFFFFF;
+}
+
+/* =========================
+   BOTTOM PROMO CARD
+========================= */
+.promo-card {
+  background: #2D6A4F;
+  border-radius: 12px;
+
+  padding: 12px;
+  margin-top: 16px;
+
+  text-align: center;
+  color: white;
+}
+
+.promo-card img {
+  width: 100%;
+  border-radius: 8px;
+  margin-bottom: 8px;
+}
+
+.promo-title {
+  font-weight: 700;
+  font-size: 13px;
+}
+
+.promo-text {
+  font-size: 11px;
+  opacity: 0.9;
+}

@@ -1,0 +1,178 @@
+<div class="profile-page">
+
+  <!-- PAGE HEADER -->
+  <div class="page-header">
+    <div>
+      <h1>Health Profile 🌿</h1>
+      <p>
+        Update your health information to get personalized recommendations.
+      </p>
+    </div>
+  </div>
+
+  <div class="profile-layout">
+
+    <!-- LEFT SIDE -->
+    <div class="profile-form-card">
+
+      <!-- BASIC INFO -->
+      <div class="section">
+
+        <div class="section-title">
+          <h3>Basic Information</h3>
+        </div>
+
+        <div class="basic-grid">
+
+          <div class="input-group">
+            <label>Age</label>
+            <input
+              type="number"
+              [(ngModel)]="profile.age">
+          </div>
+
+          <div class="input-group">
+            <label>Gender</label>
+
+            <select [(ngModel)]="profile.gender">
+              <option value="">Select</option>
+              <option value="female">Female</option>
+              <option value="male">Male</option>
+            </select>
+          </div>
+
+          <div class="input-group">
+            <label>Height (cm)</label>
+
+            <input
+              type="number"
+              [(ngModel)]="profile.heightCm">
+          </div>
+
+          <div class="input-group">
+            <label>Weight (kg)</label>
+
+            <input
+              type="number"
+              [(ngModel)]="profile.weightKg">
+          </div>
+
+        </div>
+      </div>
+
+      <!-- ACTIVITY LEVEL -->
+      <div class="section">
+
+        <div class="section-title">
+          <h3>Activity Level</h3>
+          <p>Select your daily activity level</p>
+        </div>
+
+        <div class="cards-grid">
+
+          <div
+            class="selection-card"
+            *ngFor="let activity of activityLevels"
+            [class.active]="profile.activityLevel === activity.value"
+            (click)="selectActivity(activity.value)">
+
+            <h4>{{ activity.title }}</h4>
+            <p>{{ activity.description }}</p>
+
+          </div>
+
+        </div>
+      </div>
+
+      <!-- GOALS -->
+      <div class="section">
+
+        <div class="section-title">
+          <h3>Health Goal</h3>
+          <p>What is your main goal?</p>
+        </div>
+
+        <div class="cards-grid">
+
+          <div
+            class="selection-card"
+            *ngFor="let goal of goals"
+            [class.active]="profile.goal === goal.value"
+            (click)="selectGoal(goal.value)">
+
+            <h4>{{ goal.title }}</h4>
+            <p>{{ goal.description }}</p>
+
+          </div>
+
+        </div>
+
+      </div>
+
+      <!-- SAVE BUTTON -->
+      <div class="buttons-row">
+
+        <button class="outline-btn">
+          Recalculate Profile
+        </button>
+
+        <button class="save-btn" (click)="saveProfile()">
+          Save Profile
+        </button>
+
+      </div>
+
+    </div>
+
+    <!-- RIGHT SIDEBAR -->
+    <div class="summary-card">
+
+      <h3>Your Health Summary</h3>
+
+      <div class="summary-item">
+        <span>BMI</span>
+        <strong>{{ profile.bmi || '--' }}</strong>
+      </div>
+
+      <div class="summary-item">
+        <span>Daily Calories</span>
+        <strong>{{ profile.dailyCalories || '--' }}</strong>
+      </div>
+
+      <div class="summary-item">
+        <span>Health Score</span>
+        <strong>{{ profile.healthScore || '--' }}/100</strong>
+      </div>
+
+      <div class="summary-item">
+        <span>Goal</span>
+        <strong>{{ profile.goal || '--' }}</strong>
+      </div>
+
+      <div class="summary-item">
+        <span>Activity</span>
+        <strong>{{ profile.activityLevel || '--' }}</strong>
+      </div>
+
+      <div class="health-score-circle">
+
+        <div>
+          <h2>{{ profile.healthScore || 0 }}</h2>
+          <p>/100</p>
+        </div>
+
+      </div>
+
+      <div class="health-message">
+        <h4>Great Job!</h4>
+
+        <p>
+          You're making healthy choices for a better life.
+        </p>
+      </div>
+
+    </div>
+
+  </div>
+
+</div>
