@@ -4,6 +4,7 @@ import com.example.healthfood.DAO.entities.core.HealthProfile;
 import com.example.healthfood.DAO.entities.core.User;
 import com.example.healthfood.DAO.repositories.HealthProfileRepository;
 import com.example.healthfood.DAO.repositories.UserRepository;
+import com.example.healthfood.DTO.HealthProfileDTO;
 import com.example.healthfood.services.interfaces.HealthProfileService;
 
 import lombok.RequiredArgsConstructor;
@@ -47,7 +48,9 @@ public class HealthProfileServiceImpl implements HealthProfileService {
         existing.setDailyCalories(calories);
 
         // 🔥 HEALTH SCORE (simple for now)
-        existing.setHealthScore(80);
+        // existing.setHealthScore(80);
+        // ✅ FIXED HEALTH SCORE (NEW)
+        existing.setHealthScore(calculateHealthScore(existing, user));
 
         return healthProfileRepository.save(existing);
     }
@@ -93,4 +96,64 @@ public class HealthProfileServiceImpl implements HealthProfileService {
 
         return (int) calories;
     }
+
+    public HealthProfileDTO toDTO(HealthProfile profile) {
+
+        HealthProfileDTO dto = new HealthProfileDTO();
+
+        dto.setId(profile.getId());
+        dto.setAge(profile.getAge());
+        dto.setWeightKg(profile.getWeightKg());
+        dto.setHeightCm(profile.getHeightCm());
+        dto.setGoal(profile.getGoal());
+        dto.setGender(profile.getGender());
+        dto.setBmi(profile.getBmi());
+        dto.setDailyCalories(profile.getDailyCalories());
+        dto.setActivityLevel(profile.getActivityLevel());
+        dto.setHealthScore(profile.getHealthScore());
+        return dto;
+    }
+
+    private int calculateHealthScore(HealthProfile profile, User user) {
+
+        int score = 100;
+
+        // BMI (convert BigDecimal → double)
+        double bmi = profile.getBmi().doubleValue();
+
+        if (bmi < 18.5) score -= 10;
+        else if (bmi <= 24.9) score += 5;
+        else if (bmi <= 29.9) score -= 10;
+        else score -= 20;
+
+        // Age
+        if (profile.getAge() > 50) score -= 10;
+        else if (profile.getAge() > 35) score -= 5;
+
+        // Activity
+        switch (profile.getActivityLevel().toLowerCase()) {
+            case "active" -> score += 10;
+            case "moderate" -> score += 5;
+            case "light" -> score += 2;
+            default -> score -= 5;
+        }
+
+        // Diseases
+        if (user.getDiseases() != null)
+            score -= user.getDiseases().size() * 10;
+
+        // Allergies
+        if (user.getAllergies() != null)
+            score -= user.getAllergies().size() * 5;
+
+        // Goal
+        switch (profile.getGoal().toLowerCase()) {
+            case "maintain" -> score += 5;
+            case "lose" -> score += 3;
+            case "gain" -> score -= 2;
+        }
+
+        return Math.max(0, Math.min(100, score));
+    }
+
 }

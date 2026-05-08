@@ -1,10 +1,9 @@
 package com.example.healthfood.controllers;
 
 import com.example.healthfood.DAO.entities.core.HealthProfile;
+import com.example.healthfood.DTO.HealthProfileDTO;
 import com.example.healthfood.services.interfaces.HealthProfileService;
-
 import lombok.RequiredArgsConstructor;
-
 import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
 
@@ -17,20 +16,24 @@ public class HealthProfileController {
 
     // ✅ CREATE / UPDATE
     @PostMapping
-    public HealthProfile saveProfile(@RequestBody HealthProfile profile,
-                                     Authentication authentication) {
+    public HealthProfileDTO saveProfile(@RequestBody HealthProfile profile,
+                                        Authentication authentication) {
 
         String email = authentication.getName();
 
-        return healthProfileService.createOrUpdateProfile(profile, email);
+        HealthProfile saved = healthProfileService.createOrUpdateProfile(profile, email);
+
+        return healthProfileService.toDTO(saved);
     }
 
     // ✅ GET PROFILE
     @GetMapping
-    public HealthProfile getProfile(Authentication authentication) {
+    public HealthProfileDTO getProfile(Authentication authentication) {
 
         String email = authentication.getName();
 
-        return healthProfileService.getProfile(email);
+        HealthProfile profile = healthProfileService.getProfile(email);
+
+        return healthProfileService.toDTO(profile);
     }
 }

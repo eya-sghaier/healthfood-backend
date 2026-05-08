@@ -24,6 +24,7 @@ public class SecurityConfig {
 
         http
             .csrf(csrf -> csrf.disable()) // 🔥 IMPORTANT for Postman
+            .cors(cors -> {}) // 👈 IMPORTANT
             .authorizeHttpRequests(auth -> auth
                 .requestMatchers("/api/auth/**").permitAll() // ✅ allow auth endpoints
                 .anyRequest().authenticated()

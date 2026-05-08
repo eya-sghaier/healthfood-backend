@@ -10,6 +10,7 @@ import com.example.healthfood.DAO.entities.reference.Allergy;
 import com.example.healthfood.DAO.entities.reference.DietaryPreference;
 import com.example.healthfood.DAO.entities.reference.Disease;
 import com.example.healthfood.DAO.entities.reference.Intolerance;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @NoArgsConstructor
 @AllArgsConstructor
@@ -31,6 +32,7 @@ public class User {
     private LocalDateTime createdAt = LocalDateTime.now();
     private LocalDateTime updatedAt = LocalDateTime.now();
 
+    @JsonIgnore
     @OneToOne(mappedBy = "user", cascade = CascadeType.ALL)
     private HealthProfile healthProfile;
 

@@ -6,6 +6,8 @@ import lombok.*;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 @NoArgsConstructor
 @AllArgsConstructor
 @Data
@@ -18,6 +20,7 @@ public class HealthProfile {
     private Long id;
 
     @OneToOne
+    @JsonIgnoreProperties({"healthProfile"})
     @JoinColumn(name = "user_id", unique = true)
     private User user;
 
